@@ -7,15 +7,18 @@
         -  `PORT=3000`
     -Inside the 'src/config' folder create a new file 'config.json' and then add the following piece of json
 
-    ```
-    {
-  "development": {
-    "username": <YOUR DB LOGIN>,
-    "password": <YOUR DB PASSWORD>,
-    "database": "Flights_Search_DB_DEV",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
-}
+    "development": {
+        "username": <YOUR DB LOGIN>,
+        "password": <YOUR DB PASSWORD>,
+        "database": "Flights_Search_DB_DEV",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    }
 
-    ```
+    ## DB design
+
+        - Airplane Table
+        - Flight
+        - Airport
+        - City
+
