@@ -27,7 +27,7 @@ class CityService {
             throw {error};
         }
     }
-    async getCity(cityId){
+    async getCity(cityId){ 
         try {
             const city = await this.CityRepository.getCity(cityId);
             return city;
@@ -38,3 +38,4 @@ class CityService {
 
 
 }
+module.exports = CityService;
