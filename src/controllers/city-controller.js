@@ -1,4 +1,4 @@
-const {CityService} = require('./services/index');
+const {CityService} = require('../services/index');
 
 
 
@@ -38,8 +38,9 @@ const cityService = new CityService();
 const createC = async (req, res ) => {
     try {
         const city = await cityService.createCity(req.body);
+        console.log(city);
         return res.status(201).json({
-            data:city,
+            data: city,
             success: true,
             message: 'Successfully, created a city',
             err: {}

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const {PORT} = require('./config/serverconfig.js');
 const CityRepository = require('./repository/city-repository.js');
 const CityService = require('./services/city-services.js');
+const APIroutes = require('./routes/index.js');
 const setupAndStartServer = async() =>{
     //create a express object
     const app = express();
@@ -11,6 +12,7 @@ const setupAndStartServer = async() =>{
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
+    app.use('/api', APIroutes); //any incoming request with '/api' comes than it would be of "v1" or "v2"
     app.listen(PORT, ()=>{
         console.log(`Server running at ${PORT}`);
         
