@@ -61,13 +61,13 @@ const createC = async (req, res ) => {
  * 
  * DELETE in CRUD
  * 
- * URL -> /city:id  we have id in QueryParams
+ * URL -> /city/:id  we have id in QueryParams
  */
-const destroyC = async (req, res ) => {
+const destroy = async (req, res ) => {
     try {
-        const response = await CityService.deleteCity(req.params.id);
+        const response = await cityService.deleteCity(req.params.id);
         return res.status(200).json({
-            data:response,
+            data: response,
             success: true,
             message: 'Successfully, deleted a city',
             err: {}
@@ -87,12 +87,12 @@ const destroyC = async (req, res ) => {
  * 
  * GET in CRUD
  * 
- * URL -> /city:id
+ * URL -> /city/:id
  */
 
-const getC = async (req, res ) => {
+const get = async (req, res ) => {
     try {
-        const city = await CityService.getCity(req.params.id);
+        const city = await cityService.getCity(req.params.id);
         return res.status(200).json({
             data:city,
             success: true,
@@ -117,11 +117,11 @@ const getC = async (req, res ) => {
  * 
  * UPDATE IN CRUD
  * 
- * url -> /city:id 
+ * url -> /city/:id 
  * 
  * Data -> req.body   (jiss data se update karna hai, voh bhi rahega req.body me)
  */
-const updateC = async (req, res ) => {
+const update = async (req, res ) => {
     try {
         const city = await CityService.updateCity(req.params.id, req.body);
         return res.status(200).json({
@@ -145,7 +145,7 @@ const updateC = async (req, res ) => {
 
 module.exports = {
     createC,
-    destroyC,
-    getC,
-    updateC
+    destroy,
+    get,
+    update
 }
