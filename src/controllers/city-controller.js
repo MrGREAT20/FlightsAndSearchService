@@ -19,8 +19,23 @@ const cityService = new CityService();
  * CONTROLLER --- COMMUNICATE ---->  SERVICE LAYER ----COMMUNICATE ---> REPOSITORY --- COMMUNICATE --> MODEL --COMMUNICATE--> DATABASE 
  * 
  * 
+ * HTTP CODE: 500 means the server encountered an unexpected condition that prevented it from fulfilling the request.
+ * 
+ * 
+ * HTTP CODE: 200 means indicates that the request has succeeded
+ * 
+ * 
+ * HTTP CODE: 201 means the request has succeeded and has led to the creation of a resource in the server.
+ * 
+ * 
+ * 
+ * res.json() means ??
+ * 
+ * This method sends a response (with the correct content-type) that is the parameter converted to a JSON string using the JSON.stringify() method.
+
+ * 
  */
-const create = async (req, res ) => {
+const createC = async (req, res ) => {
     try {
         const city = await cityService.createCity(req.body);
         return res.status(201).json({
@@ -47,7 +62,7 @@ const create = async (req, res ) => {
  * 
  * URL -> /city:id  we have id in QueryParams
  */
-const destroy = async (req, res ) => {
+const destroyC = async (req, res ) => {
     try {
         const response = await CityService.deleteCity(req.params.id);
         return res.status(200).json({
@@ -74,7 +89,7 @@ const destroy = async (req, res ) => {
  * URL -> /city:id
  */
 
-const get = async (req, res ) => {
+const getC = async (req, res ) => {
     try {
         const city = await CityService.getCity(req.params.id);
         return res.status(200).json({
@@ -105,7 +120,7 @@ const get = async (req, res ) => {
  * 
  * Data -> req.body   (jiss data se update karna hai, voh bhi rahega req.body me)
  */
-const update = async (req, res ) => {
+const updateC = async (req, res ) => {
     try {
         const city = await CityService.updateCity(req.params.id, req.body);
         return res.status(200).json({
@@ -128,8 +143,8 @@ const update = async (req, res ) => {
 };
 
 module.exports = {
-    create,
-    destroy,
-    get,
-    update
+    createC,
+    destroyC,
+    getC,
+    updateC
 }
