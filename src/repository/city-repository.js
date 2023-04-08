@@ -1,6 +1,7 @@
 const { where } = require('sequelize');
 const {City} = require('../models/index.js');
 const city = require('../models/city.js');
+const {Op} = require('sequelize');
 
 class CityRepository{
     async createCity({name}){
@@ -46,9 +47,20 @@ class CityRepository{
             throw {error};
         }
     }
-    async getAllCities(){
+    async getAllCities(filter){ //filter can be empty also
         try {
-            const cities = await City.findAll();
+            if(filter.name){ //agar filter.name empty nhi hai, matlab user ne kuch search kiya hai character
+                const cities = await City.findAll({
+                    where:{
+                        name:{
+                            [Op.startsWith]:filter.name
+                        }
+                    }
+                });
+                return cities;
+
+            }
+            const cities = await City.findAll(); //agr filter empty hai, toh sabh cities aane chahiye
             return cities;
         } catch (error) {
             throw {error};
