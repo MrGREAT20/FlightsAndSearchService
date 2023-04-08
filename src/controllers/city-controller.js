@@ -123,7 +123,7 @@ const get = async (req, res ) => {
  */
 const update = async (req, res ) => {
     try {
-        const city = await CityService.updateCity(req.params.id, req.body);
+        const city = await cityService.updateCity(req.params.id, req.body);
         return res.status(200).json({
             data:city,
             success: true,
@@ -142,10 +142,35 @@ const update = async (req, res ) => {
     }
 
 };
+/**
+ * GET ALL CITIES in THE DATABASE
+ * 
+ * 
+ */
+const getAll = async (req, res) => {
+    try {
+        const cities = await cityService.getAllCities();
+        return res.status(200).json({
+            data:cities,
+            success: true,
+            message: 'Successfully, fetched all cities',
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data:{},
+            success: false,
+            message: 'Not able to fetch all the  Cities',
+            err: error
+        });
+    }
+};
 
 module.exports = {
     createC,
     destroy,
     get,
-    update
+    update,
+    getAll
 }
