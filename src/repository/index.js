@@ -1,5 +1,7 @@
 module.exports = {
-    CityRepository: require('./city-repository')
+    CityRepository: require('./city-repository'),
+    FlightRepository: require('./flight-repository'),
+    AirplaneRepository: require('./airplane-repository'),
 
 }
 // yeh alag se kyu banaya index.js?
