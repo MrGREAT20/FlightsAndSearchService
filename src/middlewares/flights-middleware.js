@@ -1,3 +1,5 @@
+
+const {ClientErrors} = require('../utils/error-codes');
 const validateCreateFlight = (req, res, next) => {
     if(
         !req.body.flightNumber || !req.body.airplaneId || !req.body.departureAirportId 
@@ -6,7 +8,7 @@ const validateCreateFlight = (req, res, next) => {
     {
         //if any of the body params is not present, then aise request ko aage jaane hi matt do, because yeh sabh
         //params important hai flight service ke liye
-        return res.status(400).json({
+        return res.status(ClientErrors.BAD_REQUEST).json({
             message:'Invalid req body to create flight',
             data: {},
             success: false,

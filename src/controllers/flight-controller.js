@@ -1,11 +1,26 @@
 const {FlightService} = require('../services/index');
-
+const {SuccessCodes, ServerErrors} = require('../utils/error-codes');
 const flightService = new FlightService();
 
 const create = async (req, res) => {
     try {
-        const flight = await flightService.createFlight(req.body);
-        return res.status(201).json({
+        const flightdata = {
+            flightNumber: req.body.flightNumber,
+            airplaneId: req.body.airplaneId,
+            departureAirportId: req.body.departureAirportId,
+            arrivalAirportId: req.body.arrivalAirportId,
+            arrivalTime: req.body.arrivalTime,
+            departureTime: req.body.departureTime,
+            price: req.body.price
+
+        }
+        /**
+         * since kabhi kabhi ek request body me kaam se jyada bhi saaman ho sakta hai
+         * or hume utne saaman ki garaj nhi hai, toh hum utna hi lenge jitne ki jarurat hai
+         * or voh aage service ko pass karenge
+         */
+        const flight = await flightService.createFlight(flightdata);
+        return res.status(SuccessCodes.CREATED).json({
             data:flight,
             success:true,
             err:{},
@@ -14,7 +29,7 @@ const create = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(ServerErrors.INTERNAL_SERVER_ERROR).json({
             data:{},
             success: false,
             message: 'Not able to create a Flight',
@@ -25,7 +40,7 @@ const create = async (req, res) => {
 const getAll = async (req, res) => {
     try {
         const flights = await flightService.getAllFlights(req.query);
-        return res.status(200).json({
+        return res.status(SuccessCodes.OK).json({
             data:flights,
             success:true,
             err:{},
@@ -34,7 +49,7 @@ const getAll = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(ServerErrors.INTERNAL_SERVER_ERROR).json({
             data:{},
             success: false,
             message: 'Not able to fetch Flights',
@@ -45,7 +60,7 @@ const getAll = async (req, res) => {
 const getFlight = async(req, res) => {
     try {
         const flight = await flightService.getFlightData(req.params.id);
-        return res.status(200).json({
+        return res.status(SuccessCodes.OK).json({
             data:flight,
             success:true,
             err:{},
@@ -53,7 +68,7 @@ const getFlight = async(req, res) => {
         })
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(ServerErrors.INTERNAL_SERVER_ERROR).json({
             data:{},
             success: false,
             message: 'Not able to fetch Flight',
