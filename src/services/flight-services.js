@@ -74,7 +74,8 @@ class FlightService{
     }
     async updateFlight(flightId, data) {
         try {
-            const response = await this.flightrespository.updateFlights(flightId, data);
+            console.log(flightId, data);
+            const response = await this.flightRepository.updateFlights(flightId, data);
             return response;
         } catch (error) {
             console.log("Something went wrong at service layer");

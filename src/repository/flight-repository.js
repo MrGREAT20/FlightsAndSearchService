@@ -69,7 +69,7 @@ class FlightRepository{
         try {
            await Flights.update(data, {
                where: {
-                   id: flightId
+                   id: flightId 
                }
            });
            return true;
