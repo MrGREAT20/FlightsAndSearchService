@@ -101,5 +101,6 @@ const update = async (req, res) => {
 module.exports = {
     create,
     getFlight,
-    getAll
+    getAll,
+    update
 }
